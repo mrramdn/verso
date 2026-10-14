@@ -139,6 +139,19 @@ components:
     padding: 0 20px
   button-ghost-hover:
     backgroundColor: "{colors.accent}"
+  button-destructive:
+    borderColor: "{colors.destructive}"
+    textColor: "{colors.destructive}"
+    typography: "{typography.button}"
+    rounded: "{rounded.sm}"
+    height: 44px
+    padding: 0 20px
+  button-destructive-hover:
+    backgroundColor: "{colors.destructive}"
+    textColor: "{colors.destructive-foreground}"
+  button-small:
+    height: 32px
+    padding: 0 14px
   icon-button:
     textColor: "{colors.muted-foreground}"
     rounded: "{rounded.sm}"
@@ -179,6 +192,8 @@ components:
     rounded: "{rounded.sm}"
     height: 44px
     padding: 0 14px
+  text-field-error:
+    borderColor: "{colors.destructive}"
   tab-selected:
     borderColor: "{colors.primary}"
     textColor: "{colors.foreground}"
@@ -317,6 +332,7 @@ Rules:
 - The page is `bg-background`. Reading content sits directly on the paper in one column with a `max-w-prose` measure, centered or on the left with a wide margin for notes. Cards are for lists of things (a reading list, an archive), not for the text itself.
 - Panels in a grid are separated by hairlines, not gaps: the container has `border-t border-l border-border`, every cell has `border-r border-b border-border`. Nothing floats.
 - A thick-thin rule (`<hr class="verso-rule">`) separates a masthead from the page, or one part of an issue from the next. Use it once or twice a page, never as a divider between list rows.
+- In running text, paragraphs follow each other without space; every paragraph after the first in a section is indented 1.5em (`indent-[1.5em]`), as in a book. The paragraph after a heading or a pull quote is not indented.
 - Metadata (byline, date, reading time) sits in one line of `type-small text-muted-foreground`, parts separated by a middle dot ( · ), under a hairline.
 - Inside a panel, the header holds an overline name on the left and quiet icon buttons on the right; the content below is left-aligned.
 
@@ -343,17 +359,17 @@ Icons are Lucide at 16px (`size-4`) in compact buttons and lists, 20px (`size-5`
 
 ## Components
 
-Copy these recipes. The live versions are in `preview/index.html`; every class is a token of `verso.css` or a Tailwind utility.
+Copy these recipes. The live versions are in `preview/index.html`, each with its variants and states and neutral placeholder text; every class is a token of `verso.css` or a Tailwind utility. `preview/demo.html` is an example screen, an article page of a long-form publication, built only from these recipes and layout utilities.
 
 ### Article header
 
-The opening of an article: a red overline (section and issue), the headline, the standfirst, then the byline under a hairline. Keep it inside the `max-w-prose` measure.
+The opening of an article: a red kicker (section or series), the headline, the dek (standfirst), then the byline under a hairline. Keep it inside the `max-w-prose` measure, or across the text and its margin.
 
 ```html
-<header class="w-full"><p class="type-overline text-primary">Cities · Issue 48</p><h1 class="mt-3 type-h1">The last ice seller of Pasar Baru</h1><p class="mt-4 type-standfirst text-muted-foreground">Every morning since 1973 a hand cart on Jalan Pintu Air has sold block ice. Its owner measures the day by how far the ice has sunk.</p><p class="mt-6 border-t border-border pt-4 type-small text-muted-foreground"><span class="text-foreground">Nadia Prameswari</span> · 12 October 2026 · <span class="whitespace-nowrap">9 min read</span></p></header>
+<header class="w-full"><p class="type-overline text-primary">Kicker</p><h1 class="mt-3 type-h1">Headline set in the display style</h1><p class="mt-4 type-standfirst text-muted-foreground">A dek explains the story in one or two sentences.</p><p class="mt-6 border-t border-border pt-4 type-small text-muted-foreground">By <span class="text-foreground">Author name</span> · 14 Oct 2026 · <span class="whitespace-nowrap">6 min read</span></p></header>
 ```
 
-- The overline is the only red text in the header. The headline is ink, regular weight.
+- The kicker is the only red text in the header. The headline is ink, regular weight.
 - The reading time comes from the word count at 230 words a minute, rounded up.
 
 ### Drop cap
@@ -361,40 +377,47 @@ The opening of an article: a red overline (section and issue), the headline, the
 The first paragraph of a piece. `verso-dropcap` sets the first letter in red, three lines deep, through `::first-letter`; the paragraph is ordinary `type-body`.
 
 ```html
-<p class="w-full type-body verso-dropcap">There is a hand cart on Jalan Pintu Air that has sold block ice every morning since 1973. Pak Hasan, its owner, measures the day by how far the ice has sunk below the rim of the tub.</p>
+<p class="w-full type-body verso-dropcap">A drop cap opens the first paragraph of a piece. Its first letter is set three lines deep in the red ink, and the rest of the paragraph runs around it in the body style.</p>
 ```
 
 One drop cap per article, on the first paragraph only. Do not open a paragraph that starts with a quotation mark or a number with a drop cap.
 
 ### Button
 
-44px tall, 2px corners, `type-ui`. One primary button per view.
+44px tall, 2px corners, `type-ui`. Four variants: primary (filled red), secondary (outlined), ghost (text only) and destructive (outlined in the deeper oxblood, filled on hover). One primary button per view.
 
 ```html
-<button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Subscribe</button>
+<div class="flex flex-wrap gap-3"><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Save</button><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-input text-foreground hover:bg-accent">Continue</button><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 text-foreground hover:bg-accent">Cancel</button><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground">Delete</button></div>
 ```
 
-- Secondary (outlined): replace the color classes with `border border-input text-foreground hover:bg-accent`.
-- Ghost: `text-foreground hover:bg-accent`.
-- Small (32px): `h-8 px-3.5` instead of `h-11 px-5`, as in `<button type="button" class="inline-flex h-8 shrink-0 items-center justify-center gap-2 rounded-sm border border-input px-3.5 type-ui text-foreground transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-40">Copy link</button>`.
-- Labels are sentence case verbs: Subscribe, Read later, Share.
+- The shared base is `inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40`; the variant adds its colors.
+- Primary: `bg-primary text-primary-foreground hover:bg-primary-hover`. Secondary: `border border-input text-foreground hover:bg-accent`. Ghost: `text-foreground hover:bg-accent`. Destructive: `border border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground`.
+- Labels are sentence case verbs: Save, Continue, Cancel, Delete.
+
+### Button sizes
+
+Two sizes and the disabled state. Default is 44px (`h-11 px-5`); small is 32px (`h-8 px-3.5`), for toolbars, panel headers and dense rows. Disabled buttons drop to 40% opacity and ignore the pointer.
+
+```html
+<div class="flex flex-col items-start gap-4"><div class="flex flex-wrap items-center gap-3"><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Save</button><button type="button" class="inline-flex h-8 shrink-0 items-center justify-center gap-2 rounded-sm px-3.5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Save</button></div><div class="flex flex-wrap items-center gap-3"><button type="button" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-input text-foreground hover:bg-accent">Continue</button><button type="button" class="inline-flex h-8 shrink-0 items-center justify-center gap-2 rounded-sm px-3.5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-input text-foreground hover:bg-accent">Continue</button></div><div class="flex flex-wrap items-center gap-3"><button type="button" disabled class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Save</button><button type="button" disabled class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-input text-foreground hover:bg-accent">Continue</button></div></div>
+```
 
 ### Icon button
 
-40px square hit area around a 20px Lucide icon at stroke 1.5.
+A 40px square hit area around a 20px Lucide icon at stroke 1.5; compact is 32px (`size-8`) with a 16px icon, for panel headers and table rows.
 
 ```html
-<button type="button" aria-label="Save for later" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"><!-- 20px Lucide icon --></button>
+<div class="flex flex-col items-start gap-3"><div class="flex gap-1"><button type="button" aria-label="Save" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 20px Lucide icon --></button><button type="button" aria-label="Share" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 20px Lucide icon --></button><button type="button" aria-label="More" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 20px Lucide icon --></button></div><div class="flex gap-1"><button type="button" aria-label="Save" class="inline-flex size-8 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 16px Lucide icon --></button><button type="button" aria-label="Share" class="inline-flex size-8 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 16px Lucide icon --></button><button type="button" aria-label="More" disabled class="inline-flex size-8 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40"><!-- 16px Lucide icon --></button></div></div>
 ```
 
-Compact (32px, for panel headers and table rows): `size-8` with a 16px icon.
+Every icon button has an `aria-label`. Disabled: the `disabled` attribute, at 40% opacity.
 
 ### Chip
 
 A filter in a hairline box. Pressed, the outline and the text turn red. In a filter group any number may be pressed; in a tab-like group exactly one.
 
 ```html
-<button type="button" aria-pressed="false" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Cities</button>
+<div role="group" aria-label="Options" class="flex flex-wrap gap-2"><button type="button" aria-pressed="true" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Option A</button><button type="button" aria-pressed="false" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Option B</button><button type="button" aria-pressed="false" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Option C</button></div>
 ```
 
 ### Toggle
@@ -402,17 +425,17 @@ A filter in a hairline box. Pressed, the outline and the text turn red. In a fil
 A 40 by 22px switch drawn with a hairline (`verso-switch`): off is an outlined track with a gray dot, on is a red track with a paper dot. Flip `aria-checked` on click. Wrap it in a `label` with the text so that the text is the accessible name and a click on it toggles the switch.
 
 ```html
-<label class="flex items-center justify-between gap-6 py-3"><span class="type-body">Night reading</span><button type="button" role="switch" aria-checked="true" class="verso-switch"></button></label>
+<div class="w-full divide-y divide-border"><label class="flex items-center justify-between gap-6 py-3 has-[:disabled]:text-muted-foreground"><span class="type-body">Notifications</span><button type="button" role="switch" aria-checked="true" class="verso-switch"></button></label><label class="flex items-center justify-between gap-6 py-3 has-[:disabled]:text-muted-foreground"><span class="type-body">Email updates</span><button type="button" role="switch" aria-checked="false" class="verso-switch"></button></label><label class="flex items-center justify-between gap-6 py-3 has-[:disabled]:text-muted-foreground"><span class="type-body">Autoplay</span><button type="button" role="switch" aria-checked="false" disabled class="verso-switch"></button></label></div>
 ```
 
-Stack settings with `divide-y divide-border`.
+Stack settings with `divide-y divide-border`. A disabled switch is at 40% opacity and its label turns `muted-foreground` through `has-[:disabled]`.
 
 ### Slider
 
-A native range input drawn as a 2px line (`verso-slider`): red up to the value, `input` beyond it, with a hairline-ringed thumb. Chrome and Safari need `--slider-fill` to paint the filled part, so update it on every `input` event; the `output` shows the value.
+A native range input drawn as a 2px line (`verso-slider`): red up to the value, `input` beyond it, with a hairline-ringed thumb. Chrome and Safari need `--slider-fill` to paint the filled part, so update it on every `input` event; the `output` shows the value. Disabled, the slider is at 40% opacity and its label is `muted-foreground`.
 
 ```html
-<div class="w-full"><div class="flex items-baseline justify-between gap-4"><span class="type-ui">Text size</span><output data-output class="type-small text-muted-foreground tabular-nums">19 px</output></div><input type="range" min="16" max="24" value="19" aria-label="Text size" class="mt-2 verso-slider" /></div>
+<div class="w-full space-y-5"><div><div class="flex items-baseline justify-between gap-4"><span class="type-ui">Text size</span><output data-output class="type-small text-muted-foreground tabular-nums">19 px</output></div><input type="range" min="16" max="24" value="19" aria-label="Text size" class="mt-2 verso-slider" /></div><div class="text-muted-foreground"><div class="flex items-baseline justify-between gap-4"><span class="type-ui">Line height</span><output data-output class="type-small tabular-nums">30 px</output></div><input type="range" min="24" max="36" value="30" disabled aria-label="Line height" class="mt-2 verso-slider" /></div></div>
 ```
 
 ```js
@@ -421,10 +444,10 @@ el.style.setProperty('--slider-fill', `${((el.value - el.min) / (el.max - el.min
 
 ### Single selection (radio)
 
-Native radios in a `fieldset` with a `legend` in `type-ui`. `verso-radio` is an 18px circle with a hairline; checked, the ring and an 8px dot turn red.
+Native radios in a `fieldset` with a `legend` in `type-ui`. `verso-radio` is an 18px circle with a hairline; checked, the ring and an 8px dot turn red. A disabled option is at 40% opacity with its text in `muted-foreground`.
 
 ```html
-<fieldset class="w-full"><legend class="type-ui">Line length</legend><div class="mt-3 space-y-3"><label class="flex items-center gap-3 type-small"><input type="radio" name="measure" value="regular" checked class="verso-radio" />Regular, 66 characters</label></div></fieldset>
+<fieldset class="w-full"><legend class="type-ui">Label</legend><div class="mt-3 space-y-3"><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="radio" name="option" value="a" checked class="verso-radio" />Option A</label><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="radio" name="option" value="b" class="verso-radio" />Option B</label><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="radio" name="option" value="c" disabled class="verso-radio" />Option C</label></div></fieldset>
 ```
 
 ### Checkbox
@@ -432,7 +455,7 @@ Native radios in a `fieldset` with a `legend` in `type-ui`. `verso-radio` is an 
 `verso-checkbox` is an 18px square with 2px corners and a hairline; checked, it fills red with a paper check mark.
 
 ```html
-<label class="flex items-center gap-3 type-small"><input type="checkbox" checked class="verso-checkbox" />Sunday essay</label>
+<fieldset class="w-full"><legend class="type-ui">Label</legend><div class="mt-3 space-y-3"><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="checkbox" checked class="verso-checkbox" />Option A</label><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="checkbox" class="verso-checkbox" />Option B</label><label class="flex items-center gap-3 type-small has-[:disabled]:text-muted-foreground"><input type="checkbox" disabled class="verso-checkbox" />Option C</label></div></fieldset>
 ```
 
 Group options under a `legend` as the radios do, with `space-y-3`.
@@ -442,33 +465,39 @@ Group options under a `legend` as the radios do, with `space-y-3`.
 44px, 2px corners, a hairline in `input` on the lighter card color. The label sits above in `type-ui`, the hint below in `type-small`. Field text is Instrument Sans at 16px.
 
 ```html
-<label class="block w-full"><span class="type-ui">Display name</span><input type="text" value="Nadia Prameswari" class="mt-2 h-11 w-full rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground disabled:opacity-40" /><span class="mt-2 block type-small text-muted-foreground">Shown with your comments.</span></label>
+<label class="block w-full"><span class="type-ui">Email</span><input type="email" placeholder="name@example.com" class="mt-2 h-11 w-full rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground disabled:opacity-40" /><span class="mt-2 block type-small text-muted-foreground">Supporting text that explains the field.</span></label>
 ```
 
-For an error, add `aria-invalid="true"`, swap `border-input` for `border-destructive`, and set the hint in `text-destructive` saying how to fix the value.
+### Text field states
+
+Error and disabled. For an error, add `aria-invalid="true"`, swap `border-input` for `border-destructive`, and replace the hint with a sentence in `text-destructive` that says how to fix the value, tied to the field with `aria-describedby`. Disabled fields are at 40% opacity.
+
+```html
+<div class="w-full space-y-5"><label class="block"><span class="type-ui">Email</span><input type="email" value="name@example" aria-invalid="true" aria-describedby="email-error" class="mt-2 h-11 w-full rounded-sm border border-destructive bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground" /><span id="email-error" class="mt-2 block type-small text-destructive">Enter an email address such as name@example.com.</span></label><label class="block"><span class="type-ui">Search</span><input type="search" placeholder="Search" disabled class="mt-2 h-11 w-full rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground disabled:opacity-40" /><span class="mt-2 block type-small text-muted-foreground">Supporting text that explains the field.</span></label></div>
+```
 
 ### Subscribe form
 
-An email field and the primary button on one line, a sentence above, the terms below. On success, replace the form with one sentence that says what happens next.
+An email field and the primary button on one line, a title above, a line about frequency and leaving below. On success, replace the form with one sentence that says what happens next.
 
 ```html
-<form class="w-full"><p class="type-title">One essay, every Sunday morning.</p><div class="mt-4 flex gap-2"><input type="email" required aria-label="Email" placeholder="you@example.com" class="h-11 min-w-0 flex-1 rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground" /><button type="submit" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Subscribe</button></div><p class="mt-3 type-small text-muted-foreground">Sent on Sundays. Unsubscribe in one click.</p></form>
+<form class="w-full" data-subscribe><p class="type-title">Subscribe by email</p><div class="mt-4 flex gap-2"><input type="email" required aria-label="Email" placeholder="name@example.com" class="h-11 min-w-0 flex-1 rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground" /><button type="submit" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Subscribe</button></div><p class="mt-3 type-small text-muted-foreground">Supporting text says how often mail is sent.</p></form>
 ```
 
 ### Tabs
 
-Text tabs on a hairline. The selected tab is ink with a 2px red underline that sits on the hairline. Arrow keys move between tabs; only the selected tab is in the tab order.
+Text tabs on a hairline. The selected tab is ink with a 2px red underline that sits on the hairline. Arrow keys move between tabs; only the selected tab is in the tab order. A section nav made of links uses the same classes with `aria-current="page"` and `aria-[current=page]:` in place of `aria-selected`.
 
 ```html
-<div role="tablist" aria-label="Section" class="flex w-full gap-6 border-b border-border"><button type="button" role="tab" aria-selected="true" class="-mb-px h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-selected:border-primary aria-selected:text-foreground">Latest</button><button type="button" role="tab" aria-selected="false" tabindex="-1" class="-mb-px h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-selected:border-primary aria-selected:text-foreground">Essays</button></div>
+<div role="tablist" aria-label="Period" class="flex w-full gap-6 border-b border-border"><button type="button" role="tab" aria-selected="true" class="-mb-px h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-selected:border-primary aria-selected:text-foreground">Day</button><button type="button" role="tab" aria-selected="false" tabindex="-1" class="-mb-px h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-selected:border-primary aria-selected:text-foreground">Week</button><button type="button" role="tab" aria-selected="false" tabindex="-1" class="-mb-px h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-selected:border-primary aria-selected:text-foreground">Month</button></div>
 ```
 
 ### Table of contents
 
-Entries in the text face with dotted leaders to the page number, between hairlines. The leader is an empty span with `border-dotted` that grows to fill the line; `items-baseline` puts it on the baseline.
+Entries in the text face with dotted leaders to a page or section number, between hairlines. The leader is an empty span with `border-dotted` that grows to fill the line; `items-baseline` puts it on the baseline.
 
 ```html
-<nav aria-label="In this issue" class="w-full"><p class="type-overline text-muted-foreground">In this issue</p><ol class="mt-3 divide-y divide-border border-y border-border"><li><a href="#" class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>The ice seller</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">4</span></a></li></ol></nav>
+<nav aria-label="Contents" class="w-full"><p class="type-overline text-muted-foreground">Contents</p><ol class="mt-3 divide-y divide-border border-y border-border"><li><a href="#" class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>Section one</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">1</span></a></li><li><a href="#" class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>Section two</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">4</span></a></li><li><a href="#" class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>Section three</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">9</span></a></li></ol></nav>
 ```
 
 ### Reading progress
@@ -476,7 +505,7 @@ Entries in the text face with dotted leaders to the page number, between hairlin
 A 2px red line across the top of the article that grows with the scroll position, over a 44px bar with the title and the time left. Make the whole block `sticky top-0 bg-background` on a long page.
 
 ```html
-<div class="w-full border-b border-border"><div role="progressbar" aria-label="Reading progress" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" class="h-0.5 w-full bg-border"><div class="h-full w-[56%] bg-primary"></div></div><div class="flex h-11 items-center justify-between gap-4"><p class="truncate type-title">The last ice seller of Pasar Baru</p><p class="shrink-0 type-small text-muted-foreground">4 min left</p></div></div>
+<div class="w-full border-b border-border"><div role="progressbar" aria-label="Reading progress" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" class="h-0.5 w-full bg-border"><div class="h-full w-[56%] bg-primary"></div></div><div class="flex h-11 items-center justify-between gap-4"><p class="truncate type-title">Article title</p><p class="shrink-0 type-small text-muted-foreground">4 min left</p></div></div>
 ```
 
 ### Footnote
@@ -484,7 +513,7 @@ A 2px red line across the top of the article that grows with the scroll position
 A red superscript number in the text links to the note. The note is `type-footnote` under a hairline, at the end of the article or in the margin on wide screens.
 
 ```html
-<div class="w-full"><p class="type-body">Ice first came to the city by ship,<a href="#note-1" class="text-primary no-underline"><sup class="ml-0.5 font-sans text-[0.65em]">1</sup></a> cut from New England ponds and packed in sawdust for the voyage.</p><aside id="note-1" class="mt-5 flex gap-3 border-t border-border pt-3 type-footnote text-muted-foreground"><span class="text-primary">1</span><span>The trade lasted until the first ice plants opened; the carts outlived them.</span></aside></div>
+<div class="w-full"><p class="type-body">A footnote mark follows the word it explains,<a href="#note-1" class="text-primary no-underline"><sup class="ml-0.5 font-sans text-[0.65em]">1</sup></a> and the note sits below the text.</p><aside id="note-1" class="mt-5 flex gap-3 border-t border-border pt-3 type-footnote text-muted-foreground"><span class="text-primary">1</span><span>The note repeats the number and is set in the footnote style.</span></aside></div>
 ```
 
 Links inside running text are `text-primary underline decoration-1 underline-offset-4`: thin, offset, in red ink. The footnote mark is the one link without an underline.
@@ -494,15 +523,15 @@ Links inside running text are `text-primary underline decoration-1 underline-off
 A topic label: letterspaced capitals in a 24px hairline box. A tag is a link to its topic; a chip is a filter you press.
 
 ```html
-<a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Cities</a>
+<div class="flex flex-wrap gap-2"><a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Topic A</a><a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Topic B</a><a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Topic C</a></div>
 ```
 
 ### Badge
 
-Status is a colored dot plus a word, never color alone, on a quiet `secondary` tint.
+Status is a colored dot plus a word, never color alone, on a quiet `secondary` tint. Dots: `bg-success` for active or done, `bg-warning` for pending, `bg-destructive` for failed, `bg-muted-foreground` for a draft.
 
 ```html
-<span class="inline-flex h-6 items-center gap-2 rounded-sm bg-secondary px-2 type-caption text-secondary-foreground"><span class="size-1.5 rounded-full bg-success"></span>Published</span>
+<div class="flex flex-wrap gap-2"><span class="inline-flex h-6 items-center gap-2 rounded-sm bg-secondary px-2 type-caption text-secondary-foreground"><span class="size-1.5 rounded-full bg-success"></span>Active</span><span class="inline-flex h-6 items-center gap-2 rounded-sm bg-secondary px-2 type-caption text-secondary-foreground"><span class="size-1.5 rounded-full bg-warning"></span>Pending</span><span class="inline-flex h-6 items-center gap-2 rounded-sm bg-secondary px-2 type-caption text-secondary-foreground"><span class="size-1.5 rounded-full bg-destructive"></span>Failed</span><span class="inline-flex h-6 items-center gap-2 rounded-sm bg-secondary px-2 type-caption text-secondary-foreground"><span class="size-1.5 rounded-full bg-muted-foreground"></span>Draft</span></div>
 ```
 
 ### Progress
@@ -510,15 +539,15 @@ Status is a colored dot plus a word, never color alone, on a quiet `secondary` t
 A 2px line in `border` with the done part in red, under a line of `type-small` that says what the number means.
 
 ```html
-<div class="w-full"><div class="flex items-baseline justify-between gap-4 type-small"><span>Issue 48</span><span class="text-muted-foreground">3 of 4 essays edited</span></div><div role="progressbar" aria-label="Issue 48" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" class="mt-2 h-0.5 w-full bg-border"><div class="h-full w-3/4 bg-primary"></div></div></div>
+<div class="w-full"><div class="flex items-baseline justify-between gap-4 type-small"><span>Label</span><span class="text-muted-foreground">3 of 4</span></div><div role="progressbar" aria-label="Label" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" class="mt-2 h-0.5 w-full bg-border"><div class="h-full w-3/4 bg-primary"></div></div></div>
 ```
 
 ### List
 
-Rows between hairlines, no box: a title in the text face, metadata under it, a chevron on the right.
+Rows between hairlines, no box: a title in the text face, supporting text under it, a chevron on the right.
 
 ```html
-<ul class="w-full divide-y divide-border border-y border-border"><li class="flex items-center justify-between gap-4 py-3.5"><div><p class="type-title">What a kiln remembers</p><p class="mt-0.5 type-small text-muted-foreground">Ilse Brandt · 14 min</p></div><span class="text-muted-foreground"><!-- 16px chevron-right --></span></li></ul>
+<ul class="w-full divide-y divide-border border-y border-border"><li class="flex items-center justify-between gap-4 py-3.5"><div><p class="type-title">Account</p><p class="mt-0.5 type-small text-muted-foreground">Supporting text</p></div><span class="text-muted-foreground"><!-- 16px Lucide icon --></span></li><li class="flex items-center justify-between gap-4 py-3.5"><div><p class="type-title">Notifications</p><p class="mt-0.5 type-small text-muted-foreground">Supporting text</p></div><span class="text-muted-foreground"><!-- 16px Lucide icon --></span></li><li class="flex items-center justify-between gap-4 py-3.5"><div><p class="type-title">Privacy</p><p class="mt-0.5 type-small text-muted-foreground">Supporting text</p></div><span class="text-muted-foreground"><!-- 16px Lucide icon --></span></li></ul>
 ```
 
 ### Spinner
@@ -526,15 +555,15 @@ Rows between hairlines, no box: a title in the text face, metadata under it, a c
 A 20px ring drawn with a 1.5px line, the moving part in red, next to a sentence that says what is loading. `role="status"` goes on the sentence, not on the ring.
 
 ```html
-<p role="status" class="flex items-center gap-3 type-small text-muted-foreground"><span aria-hidden="true" class="size-5 animate-spin rounded-full border-[1.5px] border-border border-t-primary"></span>Loading the archive…</p>
+<p role="status" class="flex items-center gap-3 type-small text-muted-foreground"><span aria-hidden="true" class="size-5 animate-spin rounded-full border-[1.5px] border-border border-t-primary"></span>Loading…</p>
 ```
 
 ### Card
 
-The lighter paper with a hairline and 6px corners, for an item in a list of things to read: eyebrow, title, one sentence, byline.
+The lighter paper with a hairline and 6px corners, for an item in a list of things to read: overline, title, one or two sentences, byline.
 
 ```html
-<article class="w-full rounded-lg border border-border bg-card p-6"><p class="type-overline text-muted-foreground">Craft</p><h3 class="mt-3 type-h3">What a kiln remembers</h3><p class="mt-2 type-footnote text-muted-foreground">Three days of firing and a year of waiting, in a workshop that still keeps its ash.</p><p class="mt-5 type-small text-muted-foreground">Ilse Brandt · 5 October 2026 · 14 min</p></article>
+<article class="w-full rounded-lg border border-border bg-card p-6"><p class="type-overline text-muted-foreground">Overline</p><h3 class="mt-3 type-h3">Card title</h3><p class="mt-2 type-footnote text-muted-foreground">Supporting text that explains the item in a line or two.</p><p class="mt-5 type-small text-muted-foreground">Author name · 14 Oct 2026 · 6 min</p></article>
 ```
 
 ### Pull quote
@@ -542,7 +571,7 @@ The lighter paper with a hairline and 6px corners, for an item in a list of thin
 A sentence from the text, set large and light in italic between hairlines, with the source under it. One per screen of text at most.
 
 ```html
-<figure class="w-full border-y border-border py-6"><blockquote class="font-serif text-[1.75rem]/9 font-light italic">“A city is remembered by its smells before its streets.”</blockquote><figcaption class="mt-4 type-small text-muted-foreground">Nadia Prameswari</figcaption></figure>
+<figure class="w-full border-y border-border py-6"><blockquote class="font-serif text-[1.75rem]/9 font-light italic">“A pull quote repeats one line from the text, set large.”</blockquote><figcaption class="mt-4 type-small text-muted-foreground">Source or author</figcaption></figure>
 ```
 
 ### Focus

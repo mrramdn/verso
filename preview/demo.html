@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verso example: article page</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="preview.css" />
+  </head>
+  <body>
+    <!-- Lembar is an invented weekly of long reads; the people in the article are invented too. -->
+    <header class="mx-auto max-w-[1180px] px-5 sm:px-8">
+      <div class="flex items-center justify-between gap-6 pt-5 pb-4">
+        <a href="#" class="font-serif text-[2.25rem] leading-none font-light tracking-[-0.02em]">Lembar</a>
+        <p class="hidden type-small text-muted-foreground md:block">Long reads from Indonesian cities, kitchens and workshops</p>
+        <div class="flex items-center gap-2">
+          <button type="button" aria-label="Search" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+          </button>
+          <a href="#" class="inline-flex h-8 shrink-0 items-center justify-center gap-2 rounded-sm px-3.5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 border border-input text-foreground hover:bg-accent">Sign in</a>
+        </div>
+      </div>
+      <hr class="verso-rule" />
+      <nav aria-label="Sections" class="flex gap-6 overflow-x-auto border-b border-border">
+        <a href="#" class="h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:border-primary aria-[current=page]:text-foreground inline-flex items-center">Cities</a>
+        <a href="#" class="h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:border-primary aria-[current=page]:text-foreground inline-flex items-center">Food</a>
+        <a href="#" aria-current="page" class="h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:border-primary aria-[current=page]:text-foreground inline-flex items-center">Craft</a>
+        <a href="#" class="h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:border-primary aria-[current=page]:text-foreground inline-flex items-center">Letters</a>
+        <a href="#" class="h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:border-primary aria-[current=page]:text-foreground inline-flex items-center">Archive</a>
+      </nav>
+    </header>
+
+    <div class="sticky top-0 z-10 bg-background pt-3">
+      <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
+        <div class="w-full border-b border-border">
+          <div id="progress" role="progressbar" aria-label="Reading progress" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" class="h-0.5 w-full bg-border"><div class="h-full w-[12%] bg-primary"></div></div>
+          <div class="flex h-11 items-center justify-between gap-4">
+            <p class="truncate type-title">The coppersmiths who draw batik in metal</p>
+            <p id="left" class="shrink-0 type-small text-muted-foreground">3 min left</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="mx-auto max-w-[1180px] px-5 pt-10 pb-14 sm:px-8">
+      <article id="article" class="grid grid-cols-1 gap-x-12 gap-y-8 lg:grid-cols-[220px_minmax(0,1fr)_220px]">
+        <header class="w-full lg:col-span-2 lg:col-start-2">
+          <p class="type-overline text-primary">Craft · Pekalongan</p>
+          <h1 class="mt-3 max-w-[18ch] type-h1">The coppersmiths who draw batik in metal</h1>
+          <p class="mt-4 max-w-[36rem] type-standfirst text-muted-foreground">Before wax touches the cloth, someone has to bend the pattern out of copper. In Pekalongan, fewer people know how every year.</p>
+          <p class="mt-6 border-t border-border pt-4 type-small text-muted-foreground">By <span class="text-foreground">Laras Wijayanti</span> · 14 Oct 2026 · <span class="whitespace-nowrap">3 min read</span></p>
+        </header>
+
+        <aside class="flex flex-col gap-10 lg:col-start-1 lg:row-start-2">
+          <nav aria-label="Contents" class="w-full">
+            <p class="type-overline text-muted-foreground">Contents</p>
+            <ol class="mt-3 divide-y divide-border border-y border-border">
+              <li><a href="#copper" data-jump class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>A drawing in copper</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">1</span></a></li>
+              <li><a href="#wax" data-jump class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>Wax and a steady hand</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">2</span></a></li>
+              <li><a href="#orders" data-jump class="flex items-baseline gap-2 py-2.5 type-body transition-colors hover:text-primary"><span>Who still orders a cap</span><span aria-hidden="true" class="flex-1 border-b border-dotted border-input"></span><span class="type-small text-muted-foreground">3</span></a></li>
+            </ol>
+          </nav>
+          <div class="hidden w-full lg:block">
+            <div class="flex items-baseline justify-between gap-4"><span class="type-ui">Text size</span><output id="size-output" class="type-small text-muted-foreground tabular-nums">19 px</output></div>
+            <input id="size" type="range" min="17" max="22" value="19" aria-label="Text size" class="mt-2 verso-slider" />
+          </div>
+          <div class="hidden gap-1 lg:flex">
+            <button type="button" aria-label="Save for later" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" /></svg>
+            </button>
+            <button type="button" aria-label="Share" class="inline-flex size-10 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><polyline points="16 6 12 2 8 6" /><line x1="12" x2="12" y1="2" y2="15" /></svg>
+            </button>
+          </div>
+        </aside>
+
+        <div id="text" class="w-full max-w-prose lg:col-start-2 lg:row-start-2">
+          <p class="type-body verso-dropcap">Darsono’s workshop is a roofed yard behind his house, ten minutes by motorbike from the centre of Pekalongan. On the bench lies a sheet of paper with the parang pattern, the diagonal knife-blade motif, traced in pencil. Beside it lie a coil of copper strip, pliers worn bright at the tips and a soldering iron warming on a charcoal stove. He has made batik stamps here since 1987.</p>
+          <p class="type-body indent-[1.5em]">A stamp, called a cap, is how batik is made by hand in quantity. Instead of drawing wax onto the cloth line by line with a canting, a worker dips the copper stamp in hot wax and presses it onto the fabric, repeat after repeat. A good stamper covers a long cloth in under an hour;<a href="#note-1" data-jump class="text-primary no-underline"><sup class="ml-0.5 font-sans text-[0.65em]">1</sup></a> the same cloth drawn by hand takes weeks.</p>
+
+          <h2 id="copper" class="mt-8 mb-2 type-h3">A drawing in copper</h2>
+          <p class="type-body">Every line of the pattern becomes a strip of copper standing on its edge. Darsono cuts each strip to length, bends it with the pliers to follow the pencil and solders it to a frame, so that the face of the stamp is a field of thin walls two centimetres deep. The dots are short pieces of wire, set one by one. A fine stamp, twenty centimetres square, can hold more than a thousand pieces.</p>
+          <p class="type-body indent-[1.5em]">“The paper tells you the shape,” he says, “but the copper tells you if it will print.” A wall that leans by half a millimetre leaves a thicker line in the wax. When a stamp is done he files its face flat on a whetstone and tests it on scrap cloth until the print comes out even.</p>
+
+          <h2 id="wax" class="mt-8 mb-2 type-h3">Wax and a steady hand</h2>
+          <p class="type-body">In the stamping room of a batik house the wax, called malam,<a href="#note-2" data-jump class="text-primary no-underline"><sup class="ml-0.5 font-sans text-[0.65em]">2</sup></a> is kept liquid in a wide pan. The stamper dips the cap, shakes off the excess and sets it down with one firm push, matching each impression to the edge of the last. A good stamper’s repeats do not show; a careless one leaves seams.</p>
+          <figure class="my-6 w-full border-y border-border py-6"><blockquote class="font-serif text-[1.75rem]/9 font-light italic">“A stamp lasts thirty years if you clean it. A person who can make one takes ten.”</blockquote><figcaption class="mt-4 type-small text-muted-foreground">Darsono, who has made batik stamps since 1987</figcaption></figure>
+          <p class="type-body">Darsono’s stamps go to about a dozen batik houses in the city and in nearby Batang. A simple one costs Rp750,000. A fine one with two faces, one for each side of the cloth, costs Rp3.5 million and takes him three weeks.</p>
+
+          <h2 id="orders" class="mt-8 mb-2 type-h3">Who still orders a cap</h2>
+          <p class="type-body">Since UNESCO listed Indonesian batik in 2009,<a href="#note-3" data-jump class="text-primary no-underline"><sup class="ml-0.5 font-sans text-[0.65em]">3</sup></a> more of it is sold than ever, but fewer stamps are ordered. Much of the cloth sold as batik is now screen-printed with batik patterns and never touches wax, and the houses that still stamp by hand keep their old caps for decades. “A stamp lasts thirty years if you clean it,” Darsono says. “A person who can make one takes ten.”</p>
+          <p class="type-body indent-[1.5em]">He had four apprentices in the 1990s. Now he has one, his nephew Fajar, who is twenty-three and delivers food on a motorbike in the evenings. Fajar can bend a border on his own; the fine fills he still leaves to his uncle. “He asks why I set the dots by hand,” Darsono says. “I tell him a machine would not know where they go.”</p>
+
+          <div class="mt-8 flex flex-wrap gap-2">
+            <a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Batik</a>
+            <a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Copper</a>
+            <a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Pekalongan</a>
+            <a href="#" class="inline-flex h-6 items-center rounded-sm border border-border px-2 type-overline text-muted-foreground transition-colors hover:border-input hover:text-foreground">Central Java</a>
+          </div>
+        </div>
+
+        <aside class="w-full space-y-10 lg:col-start-3 lg:row-start-2">
+          <figure class="w-full max-w-[280px]">
+            <svg viewBox="0 0 200 200" class="w-full text-foreground" role="img" aria-label="Line drawing of a square copper stamp face with the parang pattern: diagonal bands of wavy strips with dots between them"><defs><clipPath id="face"><rect x="12" y="12" width="176" height="176"/></clipPath></defs><rect x="4.5" y="4.5" width="191" height="191" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="12" width="176" height="176" fill="none" stroke="currentColor" stroke-width="0.75"/><g clip-path="url(#face)"><g transform="rotate(-45 100 100)"><path d="M-60 -130H260M-60 -102H260M-60 -116q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 -94H260M-60 -66H260M-60 -80q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 -58H260M-60 -30H260M-60 -44q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 -22H260M-60 6H260M-60 -8q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 14H260M-60 42H260M-60 28q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 50H260M-60 78H260M-60 64q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 86H260M-60 114H260M-60 100q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 122H260M-60 150H260M-60 136q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 158H260M-60 186H260M-60 172q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 194H260M-60 222H260M-60 208q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 230H260M-60 258H260M-60 244q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 266H260M-60 294H260M-60 280q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0M-60 302H260M-60 330H260M-60 316q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0q9 -12 18 0t18 0" fill="none" stroke="currentColor" stroke-width="1"/><g class="text-muted-foreground" fill="currentColor"><circle cx="-132" cy="-98" r="1.6"/><circle cx="-96" cy="-98" r="1.6"/><circle cx="-60" cy="-98" r="1.6"/><circle cx="-24" cy="-98" r="1.6"/><circle cx="12" cy="-98" r="1.6"/><circle cx="48" cy="-98" r="1.6"/><circle cx="84" cy="-98" r="1.6"/><circle cx="120" cy="-98" r="1.6"/><circle cx="156" cy="-98" r="1.6"/><circle cx="192" cy="-98" r="1.6"/><circle cx="228" cy="-98" r="1.6"/><circle cx="264" cy="-98" r="1.6"/><circle cx="-132" cy="-62" r="1.6"/><circle cx="-96" cy="-62" r="1.6"/><circle cx="-60" cy="-62" r="1.6"/><circle cx="-24" cy="-62" r="1.6"/><circle cx="12" cy="-62" r="1.6"/><circle cx="48" cy="-62" r="1.6"/><circle cx="84" cy="-62" r="1.6"/><circle cx="120" cy="-62" r="1.6"/><circle cx="156" cy="-62" r="1.6"/><circle cx="192" cy="-62" r="1.6"/><circle cx="228" cy="-62" r="1.6"/><circle cx="264" cy="-62" r="1.6"/><circle cx="-132" cy="-26" r="1.6"/><circle cx="-96" cy="-26" r="1.6"/><circle cx="-60" cy="-26" r="1.6"/><circle cx="-24" cy="-26" r="1.6"/><circle cx="12" cy="-26" r="1.6"/><circle cx="48" cy="-26" r="1.6"/><circle cx="84" cy="-26" r="1.6"/><circle cx="120" cy="-26" r="1.6"/><circle cx="156" cy="-26" r="1.6"/><circle cx="192" cy="-26" r="1.6"/><circle cx="228" cy="-26" r="1.6"/><circle cx="264" cy="-26" r="1.6"/><circle cx="-132" cy="10" r="1.6"/><circle cx="-96" cy="10" r="1.6"/><circle cx="-60" cy="10" r="1.6"/><circle cx="-24" cy="10" r="1.6"/><circle cx="12" cy="10" r="1.6"/><circle cx="48" cy="10" r="1.6"/><circle cx="84" cy="10" r="1.6"/><circle cx="120" cy="10" r="1.6"/><circle cx="156" cy="10" r="1.6"/><circle cx="192" cy="10" r="1.6"/><circle cx="228" cy="10" r="1.6"/><circle cx="264" cy="10" r="1.6"/><circle cx="-132" cy="46" r="1.6"/><circle cx="-96" cy="46" r="1.6"/><circle cx="-60" cy="46" r="1.6"/><circle cx="-24" cy="46" r="1.6"/><circle cx="12" cy="46" r="1.6"/><circle cx="48" cy="46" r="1.6"/><circle cx="84" cy="46" r="1.6"/><circle cx="120" cy="46" r="1.6"/><circle cx="156" cy="46" r="1.6"/><circle cx="192" cy="46" r="1.6"/><circle cx="228" cy="46" r="1.6"/><circle cx="264" cy="46" r="1.6"/><circle cx="-132" cy="82" r="1.6"/><circle cx="-96" cy="82" r="1.6"/><circle cx="-60" cy="82" r="1.6"/><circle cx="-24" cy="82" r="1.6"/><circle cx="12" cy="82" r="1.6"/><circle cx="48" cy="82" r="1.6"/><circle cx="84" cy="82" r="1.6"/><circle cx="120" cy="82" r="1.6"/><circle cx="156" cy="82" r="1.6"/><circle cx="192" cy="82" r="1.6"/><circle cx="228" cy="82" r="1.6"/><circle cx="264" cy="82" r="1.6"/><circle cx="-132" cy="118" r="1.6"/><circle cx="-96" cy="118" r="1.6"/><circle cx="-60" cy="118" r="1.6"/><circle cx="-24" cy="118" r="1.6"/><circle cx="12" cy="118" r="1.6"/><circle cx="48" cy="118" r="1.6"/><circle cx="84" cy="118" r="1.6"/><circle cx="120" cy="118" r="1.6"/><circle cx="156" cy="118" r="1.6"/><circle cx="192" cy="118" r="1.6"/><circle cx="228" cy="118" r="1.6"/><circle cx="264" cy="118" r="1.6"/><circle cx="-132" cy="154" r="1.6"/><circle cx="-96" cy="154" r="1.6"/><circle cx="-60" cy="154" r="1.6"/><circle cx="-24" cy="154" r="1.6"/><circle cx="12" cy="154" r="1.6"/><circle cx="48" cy="154" r="1.6"/><circle cx="84" cy="154" r="1.6"/><circle cx="120" cy="154" r="1.6"/><circle cx="156" cy="154" r="1.6"/><circle cx="192" cy="154" r="1.6"/><circle cx="228" cy="154" r="1.6"/><circle cx="264" cy="154" r="1.6"/><circle cx="-132" cy="190" r="1.6"/><circle cx="-96" cy="190" r="1.6"/><circle cx="-60" cy="190" r="1.6"/><circle cx="-24" cy="190" r="1.6"/><circle cx="12" cy="190" r="1.6"/><circle cx="48" cy="190" r="1.6"/><circle cx="84" cy="190" r="1.6"/><circle cx="120" cy="190" r="1.6"/><circle cx="156" cy="190" r="1.6"/><circle cx="192" cy="190" r="1.6"/><circle cx="228" cy="190" r="1.6"/><circle cx="264" cy="190" r="1.6"/><circle cx="-132" cy="226" r="1.6"/><circle cx="-96" cy="226" r="1.6"/><circle cx="-60" cy="226" r="1.6"/><circle cx="-24" cy="226" r="1.6"/><circle cx="12" cy="226" r="1.6"/><circle cx="48" cy="226" r="1.6"/><circle cx="84" cy="226" r="1.6"/><circle cx="120" cy="226" r="1.6"/><circle cx="156" cy="226" r="1.6"/><circle cx="192" cy="226" r="1.6"/><circle cx="228" cy="226" r="1.6"/><circle cx="264" cy="226" r="1.6"/><circle cx="-132" cy="262" r="1.6"/><circle cx="-96" cy="262" r="1.6"/><circle cx="-60" cy="262" r="1.6"/><circle cx="-24" cy="262" r="1.6"/><circle cx="12" cy="262" r="1.6"/><circle cx="48" cy="262" r="1.6"/><circle cx="84" cy="262" r="1.6"/><circle cx="120" cy="262" r="1.6"/><circle cx="156" cy="262" r="1.6"/><circle cx="192" cy="262" r="1.6"/><circle cx="228" cy="262" r="1.6"/><circle cx="264" cy="262" r="1.6"/><circle cx="-132" cy="298" r="1.6"/><circle cx="-96" cy="298" r="1.6"/><circle cx="-60" cy="298" r="1.6"/><circle cx="-24" cy="298" r="1.6"/><circle cx="12" cy="298" r="1.6"/><circle cx="48" cy="298" r="1.6"/><circle cx="84" cy="298" r="1.6"/><circle cx="120" cy="298" r="1.6"/><circle cx="156" cy="298" r="1.6"/><circle cx="192" cy="298" r="1.6"/><circle cx="228" cy="298" r="1.6"/><circle cx="264" cy="298" r="1.6"/><circle cx="-132" cy="334" r="1.6"/><circle cx="-96" cy="334" r="1.6"/><circle cx="-60" cy="334" r="1.6"/><circle cx="-24" cy="334" r="1.6"/><circle cx="12" cy="334" r="1.6"/><circle cx="48" cy="334" r="1.6"/><circle cx="84" cy="334" r="1.6"/><circle cx="120" cy="334" r="1.6"/><circle cx="156" cy="334" r="1.6"/><circle cx="192" cy="334" r="1.6"/><circle cx="228" cy="334" r="1.6"/><circle cx="264" cy="334" r="1.6"/></g></g></g></svg>
+            <figcaption class="mt-3 type-footnote text-muted-foreground">The face of a parang cap: copper strips set on edge and soldered to a frame. Drawing by Lembar.</figcaption>
+          </figure>
+          <section aria-label="Notes" class="max-w-prose space-y-3">
+            <p class="type-overline text-muted-foreground">Notes</p>
+            <aside id="note-1" class="flex gap-3 border-t border-border pt-3 type-footnote text-muted-foreground"><span class="text-primary">1</span><span>A kain panjang, the long wrap cloth, is about two and a half metres. A twenty-centimetre stamp is pressed on it some sixty times on each side.</span></aside>
+            <aside id="note-2" class="flex gap-3 border-t border-border pt-3 type-footnote text-muted-foreground"><span class="text-primary">2</span><span>Malam is a mix of paraffin, beeswax and pine resin. Each batik house keeps its own proportions.</span></aside>
+            <aside id="note-3" class="flex gap-3 border-t border-border pt-3 type-footnote text-muted-foreground"><span class="text-primary">3</span><span>UNESCO added Indonesian batik to its list of the intangible cultural heritage of humanity on 2 October 2009, now National Batik Day.</span></aside>
+          </section>
+        </aside>
+      </article>
+
+      <section aria-label="More to read" class="mt-12 grid grid-cols-1 gap-x-12 gap-y-10 border-t border-border pt-8 md:grid-cols-2 lg:grid-cols-3">
+        <form id="subscribe" class="w-full max-w-prose md:col-span-2 lg:col-span-1">
+          <p class="type-title">One long read, every Sunday morning.</p>
+          <div role="group" aria-label="Topics" class="mt-4 flex flex-wrap gap-2">
+            <button type="button" aria-pressed="true" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Craft</button>
+            <button type="button" aria-pressed="false" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Cities</button>
+            <button type="button" aria-pressed="false" class="inline-flex h-8 shrink-0 items-center rounded-sm border border-border px-3 type-ui text-muted-foreground transition-colors hover:border-input hover:text-foreground aria-pressed:border-primary aria-pressed:text-primary">Food</button>
+          </div>
+          <div class="mt-4 flex gap-2"><input type="email" required aria-label="Email" placeholder="name@example.com" class="h-11 min-w-0 flex-1 rounded-sm border border-input bg-card px-3.5 font-sans text-base text-foreground placeholder:text-muted-foreground" /><button type="submit" class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-sm px-5 type-ui transition-colors disabled:pointer-events-none disabled:opacity-40 bg-primary text-primary-foreground hover:bg-primary-hover">Subscribe</button></div>
+          <p class="mt-3 type-small text-muted-foreground">Free. Pick the topics you want; unsubscribe in one click.</p>
+        </form>
+        <article class="w-full rounded-lg border border-border bg-card p-6">
+          <p class="type-overline text-muted-foreground">Craft</p>
+          <h3 class="mt-3 type-h3"><a href="#" class="transition-colors hover:text-primary">In Plered, the kilns are fired twice a week</a></h3>
+          <p class="mt-2 type-footnote text-muted-foreground">Clay from the rice fields, a wood kiln the size of a room, and a family that has stopped counting the pots.</p>
+          <p class="mt-5 type-small text-muted-foreground">Dimas Prakoso · 7 Oct 2026 · 6 min</p>
+        </article>
+        <article class="w-full rounded-lg border border-border bg-card p-6">
+          <p class="type-overline text-muted-foreground">Craft</p>
+          <h3 class="mt-3 type-h3"><a href="#" class="transition-colors hover:text-primary">Kotagede’s silver is still hammered by hand</a></h3>
+          <p class="mt-2 type-footnote text-muted-foreground">Filigree wire as fine as hair, and a workshop in Yogyakarta that trains two new smiths a year.</p>
+          <p class="mt-5 type-small text-muted-foreground">Ayu Kartika · 30 Sep 2026 · 8 min</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="mx-auto max-w-[1180px] px-5 pb-10 sm:px-8">
+      <hr class="verso-rule" />
+      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 pt-4">
+        <p class="type-small text-muted-foreground"><span class="font-serif text-lg font-light text-foreground">Lembar</span> · A weekly of long reads, since 2019</p>
+        <p class="type-small text-muted-foreground">About · Write for us · Contact</p>
+      </div>
+    </footer>
+
+    <script>
+      // Reading progress: how much of the article has passed the bottom of the window. In a frame on the same
+      // site the window is the page around the frame; anywhere else it is this page.
+      const article = document.getElementById('article');
+      const text = document.getElementById('text');
+      const progress = document.getElementById('progress');
+      const left = document.getElementById('left');
+      const minutes = 3;
+      const viewBottom = () => {
+        try {
+          const frame = window.frameElement;
+          if (frame) return window.parent.innerHeight - frame.getBoundingClientRect().top;
+        } catch (error) {}
+        return window.innerHeight;
+      };
+      const paint = () => {
+        const box = text.getBoundingClientRect();
+        const read = Math.min(1, Math.max(0, (viewBottom() - box.top) / box.height));
+        const percent = Math.round(read * 100);
+        progress.setAttribute('aria-valuenow', percent);
+        progress.firstElementChild.style.width = `${percent}%`;
+        const rest = Math.ceil(minutes * (1 - read));
+        left.textContent = rest > 0 ? `${rest} min left` : 'Finished';
+      };
+      paint();
+      addEventListener('scroll', paint, { passive: true });
+      addEventListener('resize', paint);
+      try {
+        if (window.frameElement) {
+          window.parent.addEventListener('scroll', paint, { passive: true });
+          window.parent.addEventListener('resize', paint);
+        }
+      } catch (error) {}
+
+      // Contents and note marks scroll the page, or the page around the frame, to their target.
+      document.addEventListener('click', (event) => {
+        const jump = event.target.closest('[data-jump]');
+        if (jump) {
+          event.preventDefault();
+          document.querySelector(jump.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        if (event.target.closest('a[href="#"]')) event.preventDefault();
+        const chip = event.target.closest('[aria-pressed]');
+        if (chip) chip.setAttribute('aria-pressed', chip.getAttribute('aria-pressed') !== 'true');
+      });
+
+      // Text size for the article body; the line height keeps the 19 / 30 proportion.
+      const size = document.getElementById('size');
+      const sizeOutput = document.getElementById('size-output');
+      const setSize = () => {
+        size.style.setProperty('--slider-fill', `${((size.value - size.min) / (size.max - size.min)) * 100}%`);
+        sizeOutput.textContent = `${size.value} px`;
+        for (const p of text.querySelectorAll('p.type-body')) {
+          p.style.fontSize = size.value === '19' ? '' : `${size.value}px`;
+          p.style.lineHeight = size.value === '19' ? '' : `${Math.round((size.value * 30) / 19)}px`;
+        }
+        paint();
+      };
+      size.addEventListener('input', setSize);
+      setSize();
+
+      document.getElementById('subscribe').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const email = form.querySelector('input[type=email]').value;
+        const topics = [...form.querySelectorAll('[aria-pressed="true"]')].map((chip) => chip.textContent);
+        form.innerHTML = `<p class="type-title">Thank you. Your first letter arrives on Sunday.</p><p class="mt-3 type-small text-muted-foreground"></p>`;
+        form.lastElementChild.textContent = `We sent a confirmation to ${email}${topics.length ? `, for ${topics.join(', ')}` : ''}.`;
+      });
+    </script>
+  </body>
+</html>

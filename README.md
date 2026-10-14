@@ -10,10 +10,11 @@ A design system for reading: warm paper, warm ink and one red; serif text set at
 | --- | --- |
 | `verso.css` | Tailwind CSS v4 theme: color tokens (light and dark), radii, type utilities for both families, and the line-drawn controls (`verso-switch`, `verso-radio`, `verso-checkbox`, `verso-slider`), the thick-thin rule and the drop cap. Token names follow shadcn/ui. |
 | `DESIGN.md` | The rules and the component recipes, in the [design.md](https://github.com/google-labs-code/design.md) format. |
-| `preview/index.html` | Component gallery built with the theme: 22 live components with demo text from an invented weekly letter, a night-reading switch, category filters, and copy and reset buttons on every panel. |
+| `preview/index.html` | Component gallery built with the theme: 24 panels showing every component with its variants and states in neutral placeholder text, a night-reading switch, category filters, copy on every panel and reset on the ones that keep state. |
+| `preview/demo.html` | An example screen built only from the recipes: the article page of an invented weekly of long reads, with a masthead, a reading bar, a table of contents, footnotes, a pull quote, a subscribe form and related cards. |
 | `CHANGELOG.md` | What changed in each version. |
 
-Figma: [Verso](https://www.figma.com/design/IiU2krIVXjmT2BZbesCTBv) (pages Cover, Foundations and Components).
+Figma: [Verso](https://www.figma.com/design/IiU2krIVXjmT2BZbesCTBv) (pages Cover, Foundations, Components and Example, where the article page is rebuilt from component instances in light and dark).
 
 ## Use it in a project
 
@@ -34,11 +35,11 @@ The theme removes the default Tailwind color palette on purpose. Use the semanti
 
 ```sh
 pnpm install
-pnpm build   # writes preview/preview.css from the classes in preview/index.html
+pnpm build   # writes preview/preview.css from the classes in preview/index.html and preview/demo.html
 pnpm dev     # same, watching for changes
 ```
 
-Then open `preview/index.html` in a browser. Copy needs a secure context, so serve the folder (`python3 -m http.server -d preview`) if the clipboard button does nothing over `file://`.
+Then open `preview/index.html` (the component gallery) or `preview/demo.html` (the article page) in a browser. The article page is sized by its content; its reading bar follows the scroll of the page, or of the page around it when it is shown in a frame on the same site. Copy needs a secure context, so serve the folder (`python3 -m http.server -d preview`) if the clipboard button does nothing over `file://`.
 
 `npx @google/design.md lint DESIGN.md` checks the token file.
 
@@ -54,4 +55,4 @@ The version is in `package.json`, `CHANGELOG.md` says what changed, and every re
 
 ## Where the look comes from
 
-The rules are the ordinary rules of book and magazine typography: a text face at 19px on a 30px line and a 60 to 70 character measure, headings in regular weight, a lighter display size, a standfirst, a drop cap on the first paragraph, footnotes, a table of contents with dotted leaders, hairlines and a thick-thin rule between parts. The one red follows the rubrication of manuscripts, where red ink marked the way through the text: here it marks links, the main action, selected states, the drop cap and the reading progress. The colors, the controls and the dark mode are original. The demo texts are from an invented weekly letter and name no real people.
+The rules are the ordinary rules of book and magazine typography: a text face at 19px on a 30px line and a 60 to 70 character measure, headings in regular weight, a lighter display size, a standfirst, a drop cap on the first paragraph, footnotes, a table of contents with dotted leaders, hairlines and a thick-thin rule between parts. The one red follows the rubrication of manuscripts, where red ink marked the way through the text: here it marks links, the main action, selected states, the drop cap and the reading progress. The colors, the controls and the dark mode are original. The gallery uses neutral placeholder text. The article on the example page, its publication and its people are invented; the places, the craft and the 2009 UNESCO listing of Indonesian batik are real.

@@ -250,7 +250,7 @@
 /* The workhorse for interface text: tabs, chips, field labels, list metadata, small buttons. */
 @utility type-ui {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.25rem;
   letter-spacing: 0;
   font-weight: 500;
@@ -259,7 +259,7 @@
 
 @utility type-small {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.25rem;
   letter-spacing: 0;
   font-weight: 400;
