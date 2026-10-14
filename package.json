@@ -1,0 +1,14 @@
+{
+  "name": "verso",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Verso: a design system for reading, for Tailwind CSS v4, DESIGN.md and Figma",
+  "scripts": {
+    "build": "tailwindcss -i preview/input.css -o preview/preview.css --minify",
+    "dev": "tailwindcss -i preview/input.css -o preview/preview.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

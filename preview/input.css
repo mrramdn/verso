@@ -1,0 +1,4 @@
+@import "tailwindcss" source(none);
+@import "../verso.css";
+/* Only the gallery is scanned for classes, so prose in DESIGN.md or the README never adds CSS. */
+@source "./index.html";

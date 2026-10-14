@@ -1,0 +1,486 @@
+/*
+ * Verso: a theme for reading, for Tailwind CSS v4. Warm paper, warm ink and one
+ * red; serif text set to a book's measure; hairline rules instead of shadows.
+ *
+ *   @import "tailwindcss";
+ *   @import "./verso.css";
+ *
+ * Token names follow shadcn/ui, so shadcn components pick the theme up as is.
+ * The rules behind the values are in DESIGN.md.
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f4eee1;
+  --foreground: #201b18;
+  --card: #fbf7f0;
+  --card-foreground: #201b18;
+  --popover: #fbf7f0;
+  --popover-foreground: #201b18;
+  --primary: #b5321c;
+  --primary-hover: #962814;
+  --primary-foreground: #fbf7f0;
+  --secondary: #eae2d3;
+  --secondary-foreground: #201b18;
+  --muted: #eae2d3;
+  --muted-foreground: #625951;
+  --accent: #eae2d3;
+  --accent-foreground: #201b18;
+  --destructive: #8b2015;
+  --destructive-foreground: #fbf7f0;
+  --success: #4d7345;
+  --warning: #a0700e;
+  --border: #ded4c3;
+  --input: #8a7f73;
+  --ring: #b5321c;
+  --highlight: #f0d8cd;
+  --radius: 0.25rem;
+}
+
+.dark {
+  --background: #1b1816;
+  --foreground: #eae2d3;
+  --card: #24201d;
+  --card-foreground: #eae2d3;
+  --popover: #24201d;
+  --popover-foreground: #eae2d3;
+  --primary: #e0674e;
+  --primary-hover: #e97b63;
+  --primary-foreground: #1b1816;
+  --secondary: #2e2925;
+  --secondary-foreground: #eae2d3;
+  --muted: #2e2925;
+  --muted-foreground: #a79d90;
+  --accent: #2e2925;
+  --accent-foreground: #eae2d3;
+  --destructive: #d06655;
+  --destructive-foreground: #1b1816;
+  --success: #8fae7e;
+  --warning: #d4a64a;
+  --border: #3a3430;
+  --input: #7a7167;
+  --ring: #e0674e;
+  --highlight: #4a2e27;
+}
+
+@theme {
+  /* The default Tailwind palette is removed on purpose: paper, ink and one red. */
+  --color-*: initial;
+  --color-paper-50: #fbf7f0;
+  --color-paper-100: #f4eee1;
+  --color-paper-200: #eae2d3;
+  --color-paper-300: #ded4c3;
+  --color-paper-500: #8a7f73;
+  --color-ink-300: #a79d90;
+  --color-ink-500: #625951;
+  --color-ink-600: #7a7167;
+  --color-ink-700: #3a3430;
+  --color-ink-800: #2e2925;
+  --color-ink-850: #24201d;
+  --color-ink-900: #201b18;
+  --color-ink-950: #1b1816;
+  --color-red-300: #e97b63;
+  --color-red-400: #e0674e;
+  --color-red-500: #d06655;
+  --color-red-600: #b5321c;
+  --color-red-700: #962814;
+  --color-red-800: #8b2015;
+
+  /*
+   * Newsreader (text and display, with its optical-size axis) and Instrument Sans
+   * (interface) have to be loaded by the app: Google Fonts, @fontsource or next/font.
+   */
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-highlight: var(--highlight);
+
+  /* Near-square: controls 2px (rounded-sm), panels 4px (rounded-md), cards 6px (rounded-lg). Nothing rounder. */
+  --radius-xs: 1px;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 2px);
+  --radius-2xl: calc(var(--radius) + 2px);
+  --radius-3xl: calc(var(--radius) + 2px);
+  --radius-4xl: calc(var(--radius) + 2px);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  html {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-variant-numeric: oldstyle-nums proportional-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--highlight);
+    color: var(--foreground);
+  }
+}
+
+/*
+ * Type styles. Each one sets family, size, line height, tracking, weight and the
+ * figure style together. Serif roles use Newsreader with old-style figures;
+ * interface roles use Instrument Sans with lining figures. They are named type-*
+ * instead of text-* so tailwind-merge never mistakes them for a text color.
+ */
+@utility type-display {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  line-height: 4.25rem;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+@utility type-h1 {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  line-height: 3.125rem;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+@utility type-h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+@utility type-h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+@utility type-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: 0;
+  font-weight: 500;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+/* The standfirst under a headline: one or two sentences, lighter than the body. */
+@utility type-standfirst {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  line-height: 2rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+/* Running text: 19px on a 30px line, meant for a measure of 60 to 70 characters. */
+@utility type-body {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.875rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+/* Footnotes, margin notes and picture captions set in the text face. */
+@utility type-footnote {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+/* The workhorse for interface text: tabs, chips, field labels, list metadata, small buttons. */
+@utility type-ui {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+  font-weight: 500;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+@utility type-small {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+@utility type-caption {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+/* Section labels: small capitals letterspaced, as a running head in a book. */
+@utility type-overline {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+/*
+ * A thick-thin rule for section breaks: a 2px line, a 3px gap, a hairline.
+ * Use it on an <hr>.
+ */
+@utility verso-rule {
+  height: 6px;
+  margin: 0;
+  border: 0;
+  border-top: 2px solid var(--foreground);
+  border-bottom: 1px solid var(--foreground);
+  background: transparent;
+}
+
+/*
+ * Drop cap on an opening paragraph: the first letter in red ink, set three
+ * lines deep against a type-body paragraph.
+ */
+@utility verso-dropcap {
+  &::first-letter {
+    float: left;
+    margin: 0.09em 0.1em 0 0;
+    font-family: var(--font-serif);
+    font-size: 4.5em;
+    line-height: 0.76;
+    font-weight: 400;
+    color: var(--primary);
+  }
+}
+
+/*
+ * A 40 by 22px switch drawn with a hairline. Off: an outlined track with a gray
+ * dot. On: a red track with a paper dot. Flip aria-checked on click.
+ */
+@utility verso-switch {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 2.5rem;
+  height: 1.375rem;
+  border: 1px solid var(--input);
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 150ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    background: var(--input);
+    transition:
+      transform 150ms cubic-bezier(0.2, 0, 0, 1),
+      background-color 150ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  &[aria-checked="true"] {
+    border-color: var(--primary);
+    background: var(--primary);
+  }
+
+  &[aria-checked="true"]::after {
+    transform: translateX(1.125rem);
+    background: var(--primary-foreground);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* An 18px radio drawn with a hairline; checked, the ring and an 8px dot turn red. */
+@utility verso-radio {
+  appearance: none;
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  border: 1px solid var(--input);
+  border-radius: 9999px;
+  background: var(--card);
+  cursor: pointer;
+  transition:
+    border-color 150ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  &:checked {
+    border-color: var(--primary);
+    background: radial-gradient(circle, var(--primary) 0 4px, transparent 4.5px) var(--card);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* An 18px checkbox drawn with a hairline; checked, it fills red with a paper check mark. */
+@utility verso-checkbox {
+  position: relative;
+  appearance: none;
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  border: 1px solid var(--input);
+  border-radius: 2px;
+  background: var(--card);
+  cursor: pointer;
+  transition:
+    border-color 150ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5.5px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--primary-foreground);
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 150ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  &:checked {
+    border-color: var(--primary);
+    background: var(--primary);
+  }
+
+  &:checked::after {
+    transform: rotate(45deg) scale(1);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/*
+ * Native range input drawn as a 2px line with a hairline-ringed thumb. Chrome
+ * and Safari cannot paint the filled part on their own, so set --slider-fill to
+ * the value in percent whenever the input changes.
+ */
+@utility verso-slider {
+  appearance: none;
+  width: 100%;
+  height: 1.5rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 2px;
+    background: linear-gradient(to right, var(--primary) var(--slider-fill, 50%), var(--input) var(--slider-fill, 50%));
+  }
+
+  &::-moz-range-track {
+    height: 2px;
+    background: var(--input);
+  }
+
+  &::-moz-range-progress {
+    height: 2px;
+    background: var(--primary);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-top: -0.5rem;
+    border: 1px solid var(--primary);
+    border-radius: 9999px;
+    background: var(--card);
+  }
+
+  &::-moz-range-thumb {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--primary);
+    border-radius: 9999px;
+    background: var(--card);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
