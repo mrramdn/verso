@@ -3,6 +3,14 @@
 Verso uses semantic versions. While it is in beta, a minor version adds or changes tokens, components or rules,
 and a patch fixes them. Every version is a git tag (`v0.1.0`) and an entry in the design site's record.
 
+## 0.2.1 (2026-10-14)
+
+- The gallery groups its 24 panels under category headings (Article, Input, Navigation, Status, Layout), each
+  an `<h2>` in `type-h2` with the number of components beside it, instead of the row of text-tab filters under
+  the masthead. Panel names are `<h3>`, numbered in reading order, and every panel draws its own hairline box so
+  a short last row ends cleanly.
+- Figma: `Gallery/Light` and `Gallery/Dark` lose the filter row.
+
 ## 0.2.0 (2026-10-14)
 
 The gallery becomes a blank component sheet, and an example screen shows the system in use.

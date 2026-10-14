@@ -10,7 +10,7 @@ A design system for reading: warm paper, warm ink and one red; serif text set at
 | --- | --- |
 | `verso.css` | Tailwind CSS v4 theme: color tokens (light and dark), radii, type utilities for both families, and the line-drawn controls (`verso-switch`, `verso-radio`, `verso-checkbox`, `verso-slider`), the thick-thin rule and the drop cap. Token names follow shadcn/ui. |
 | `DESIGN.md` | The rules and the component recipes, in the [design.md](https://github.com/google-labs-code/design.md) format. |
-| `preview/index.html` | Component gallery built with the theme: 24 panels showing every component with its variants and states in neutral placeholder text, a night-reading switch, category filters, copy on every panel and reset on the ones that keep state. |
+| `preview/index.html` | Component gallery built with the theme: 24 panels grouped under category headings, showing every component with its variants and states in neutral placeholder text, a night-reading switch, copy on every panel and reset on the ones that keep state. |
 | `preview/demo.html` | An example screen built only from the recipes: the article page of an invented weekly of long reads, with a masthead, a reading bar, a table of contents, footnotes, a pull quote, a subscribe form and related cards. |
 | `CHANGELOG.md` | What changed in each version. |
 

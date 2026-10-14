@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="preview.css" />
   </head>
   <body>
-    <header class="border-b border-border">
+    <header>
       <div class="mx-auto max-w-[1264px] px-6 sm:px-8">
         <div class="flex items-end justify-between gap-6 pt-7 pb-5">
           <p class="flex items-baseline gap-3">
@@ -32,17 +32,16 @@
           </div>
         </div>
         <hr class="verso-rule" />
-        <div id="filters" class="-mb-px flex gap-6 overflow-x-auto" role="group" aria-label="Filter components"></div>
       </div>
     </header>
 
-    <div id="sheet" class="mx-auto max-w-[1264px] px-6 pt-10 pb-6 sm:px-8">
-      <main id="gallery" class="grid grid-cols-1 border-t border-l border-border sm:grid-cols-2 lg:grid-cols-3"></main>
+    <div id="sheet" class="mx-auto max-w-[1264px] px-6 pt-12 pb-12 sm:px-8">
+      <main id="gallery" class="space-y-14"></main>
     </div>
 
     <footer class="mx-auto flex max-w-[1264px] items-baseline justify-between gap-8 px-6 pb-10 sm:px-8">
       <p class="max-w-prose type-small text-muted-foreground">Every panel shows a component with its variants and states, in neutral text. <a href="demo.html" class="text-primary underline decoration-1 underline-offset-4">An article page</a> shows them in use.</p>
-      <p class="shrink-0 type-small text-muted-foreground">Verso 0.2.0</p>
+      <p class="shrink-0 type-small text-muted-foreground">Verso 0.2.1</p>
     </footer>
 
     <script>
@@ -236,11 +235,8 @@
 
       const compactIconButton =
         'inline-flex size-8 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground';
-      const filter =
-        'h-11 shrink-0 border-b-2 border-transparent type-ui text-muted-foreground transition-colors hover:text-foreground aria-pressed:border-primary aria-pressed:text-foreground';
 
       const gallery = document.getElementById('gallery');
-      const filters = document.getElementById('filters');
       const theme = document.getElementById('theme');
       const pad = (n) => String(n + 1).padStart(2, '0');
       const syncSliders = (root) =>
@@ -252,36 +248,36 @@
       const paintTheme = () => (theme.innerHTML = document.documentElement.classList.contains('dark') ? icons.sun : icons.moon);
 
       paintTheme();
-      filters.innerHTML = ['All', 'Article', 'Input', 'Navigation', 'Status', 'Layout']
-        .map((name, i) => `<button type="button" aria-pressed="${i === 0}" class="${filter}">${name}</button>`)
-        .join('');
-      gallery.innerHTML = components
-        .map(
-          (c, i) => `<article data-index="${i}" data-category="${c.category}" class="flex min-h-[20rem] flex-col border-r border-b border-border p-7">
+      // Panels grouped by category, in the order each category first appears; numbered in reading order.
+      const groups = [...new Set(components.map((c) => c.category))];
+      let number = 0;
+      const panel = (c) => `<article data-index="${components.indexOf(c)}" data-category="${c.category}" class="-mt-px -ml-px flex min-h-[20rem] flex-col border border-border p-7">
             <header class="flex items-center justify-between gap-4">
-              <h2 class="type-overline"><span class="mr-3 text-muted-foreground">${pad(i)}</span>${c.name}</h2>
+              <h3 class="type-overline"><span class="mr-3 text-muted-foreground">${pad(number++)}</span>${c.name}</h3>
               <div class="-mr-2 flex">
                 ${c.stateful ? `<button type="button" data-reset aria-label="Reset ${c.name}" class="${compactIconButton}">${icons.reset}</button>` : ''}
                 <button type="button" data-copy aria-label="Copy ${c.name} markup" class="${compactIconButton}">${icons.copy}</button>
               </div>
             </header>
             <div data-demo class="flex flex-1 items-center py-7">${c.html}</div>
-          </article>`,
-        )
+          </article>`;
+      gallery.innerHTML = groups
+        .map((group) => {
+          const members = components.filter((c) => c.category === group);
+          const id = `group-${group.toLowerCase()}`;
+          return `<section aria-labelledby="${id}">
+          <div class="flex items-baseline justify-between gap-6 pb-6">
+            <h2 id="${id}" class="type-h2">${group}</h2>
+            <p class="type-small text-muted-foreground">${members.length} ${members.length === 1 ? 'component' : 'components'}</p>
+          </div>
+          <div class="grid grid-cols-1 pt-px pl-px sm:grid-cols-2 lg:grid-cols-3">${members.map(panel).join('')}</div>
+        </section>`;
+        })
         .join('');
       syncSliders(gallery);
 
       theme.addEventListener('click', () => document.documentElement.classList.toggle('dark'));
       new MutationObserver(paintTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-
-      filters.addEventListener('click', (event) => {
-        const button = event.target.closest('button');
-        if (!button) return;
-        for (const b of filters.children) b.setAttribute('aria-pressed', b === button);
-        for (const card of gallery.children) {
-          card.hidden = button.textContent !== 'All' && card.dataset.category !== button.textContent;
-        }
-      });
 
       gallery.addEventListener('input', (event) => syncSliders(event.target.parentElement));
 
