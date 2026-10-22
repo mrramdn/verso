@@ -3,6 +3,17 @@
 Verso uses semantic versions. While it is in beta, a minor version adds or changes tokens, components or rules,
 and a patch fixes them. Every version is a git tag (`v0.1.0`) and an entry in the design site's record.
 
+## 0.2.2 (2026-10-24)
+
+For screen readers; nothing looks different.
+
+- The gallery's title, Verso, is its `h1`. A sample's own headings (the article header's `h1`, the card's `h3`)
+  are shown as `h4`, one level under their panel's name, so the outline no longer jumps from the sample's `h1` to
+  the next panel's `h3`. Copy still gives the recipes as written.
+- The demo's reading progress bar sits in an `aside` named "Reading progress", so all of the page is in a
+  landmark, and the Reading progress recipe says to do so outside `main`.
+- The Figma library does not change.
+
 ## 0.2.1 (2026-10-14)
 
 - The gallery groups its 24 panels under category headings (Article, Input, Navigation, Status, Layout), each

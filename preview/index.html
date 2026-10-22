@@ -17,10 +17,10 @@
     <header>
       <div class="mx-auto max-w-[1264px] px-6 sm:px-8">
         <div class="flex items-end justify-between gap-6 pt-7 pb-5">
-          <p class="flex items-baseline gap-3">
-            <span class="font-serif text-[2.5rem] leading-none tracking-[-0.02em]">Verso</span>
+          <div class="flex items-baseline gap-3">
+            <h1 class="font-serif text-[2.5rem] leading-none tracking-[-0.02em]">Verso</h1>
             <span class="type-overline text-muted-foreground">Beta</span>
-          </p>
+          </div>
           <div class="flex items-center gap-6">
             <p class="hidden type-small text-muted-foreground md:block">A design system for reading. Set in Newsreader and Instrument Sans.</p>
             <button
@@ -41,7 +41,7 @@
 
     <footer class="mx-auto flex max-w-[1264px] items-baseline justify-between gap-8 px-6 pb-10 sm:px-8">
       <p class="max-w-prose type-small text-muted-foreground">Every panel shows a component with its variants and states, in neutral text. <a href="demo.html" class="text-primary underline decoration-1 underline-offset-4">An article page</a> shows them in use.</p>
-      <p class="shrink-0 type-small text-muted-foreground">Verso 0.2.1</p>
+      <p class="shrink-0 type-small text-muted-foreground">Verso 0.2.2</p>
     </footer>
 
     <script>
@@ -248,6 +248,9 @@
       const paintTheme = () => (theme.innerHTML = document.documentElement.classList.contains('dark') ? icons.sun : icons.moon);
 
       paintTheme();
+      // A sample's own headings (the article header's h1, the card's h3) are shown one level under its panel's h3, so
+      // the page reads h1, h2, h3, h4 without a skip. Copy still gives the recipe as written in DESIGN.md.
+      const shown = (html) => html.replace(/<(\/?)h[1-6]\b/g, '<$1h4');
       // Panels grouped by category, in the order each category first appears; numbered in reading order.
       const groups = [...new Set(components.map((c) => c.category))];
       let number = 0;
@@ -259,7 +262,7 @@
                 <button type="button" data-copy aria-label="Copy ${c.name} markup" class="${compactIconButton}">${icons.copy}</button>
               </div>
             </header>
-            <div data-demo class="flex flex-1 items-center py-7">${c.html}</div>
+            <div data-demo class="flex flex-1 items-center py-7">${shown(c.html)}</div>
           </article>`;
       gallery.innerHTML = groups
         .map((group) => {
@@ -321,7 +324,7 @@
         if (pressed) pressed.setAttribute('aria-pressed', pressed.getAttribute('aria-pressed') !== 'true');
         if (event.target.closest('[data-reset]')) {
           const demo = card.querySelector('[data-demo]');
-          demo.innerHTML = component.html;
+          demo.innerHTML = shown(component.html);
           syncSliders(demo);
         }
         if (copy) {

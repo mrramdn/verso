@@ -502,7 +502,7 @@ Entries in the text face with dotted leaders to a page or section number, betwee
 
 ### Reading progress
 
-A 2px red line across the top of the article that grows with the scroll position, over a 44px bar with the title and the time left. Make the whole block `sticky top-0 bg-background` on a long page.
+A 2px red line across the top of the article that grows with the scroll position, over a 44px bar with the title and the time left. Make the whole block `sticky top-0 bg-background` on a long page; outside `main`, wrap it in an `aside` with an `aria-label` so it stays in a landmark.
 
 ```html
 <div class="w-full border-b border-border"><div role="progressbar" aria-label="Reading progress" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" class="h-0.5 w-full bg-border"><div class="h-full w-[56%] bg-primary"></div></div><div class="flex h-11 items-center justify-between gap-4"><p class="truncate type-title">Article title</p><p class="shrink-0 type-small text-muted-foreground">4 min left</p></div></div>
