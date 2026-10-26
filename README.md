@@ -13,6 +13,8 @@ A design system for reading: warm paper, warm ink and one red; serif text set at
 | `preview/index.html` | Component gallery built with the theme: 24 panels grouped under category headings, showing every component with its variants and states in neutral placeholder text, a night-reading switch, copy on every panel and reset on the ones that keep state. |
 | `preview/demo.html` | An example screen built only from the recipes: the article page of an invented weekly of long reads, with a masthead, a reading bar, a table of contents, footnotes, a pull quote, a subscribe form and related cards. |
 | `CHANGELOG.md` | What changed in each version. |
+| `LICENSE` | MIT for the CSS and HTML, CC BY 4.0 for `DESIGN.md` and the Figma library. |
+| `scripts/` | `check-version.mjs` is `pnpm check`, which fails while the places that name the release disagree; `banner-first.mjs` runs at the end of `pnpm build` and puts the Verso banner above Tailwind's on line 1 of `preview/preview.css`. |
 
 Figma: [Verso](https://www.figma.com/design/IiU2krIVXjmT2BZbesCTBv) (pages Cover, Foundations, Components and Example, where the article page is rebuilt from component instances in light and dark).
 
@@ -45,13 +47,27 @@ Then open `preview/index.html` (the component gallery) or `preview/demo.html` (t
 
 ## Versions
 
-The version is in `package.json`, `CHANGELOG.md` says what changed, and every release is a git tag. To release:
+The version is in `package.json`, `CHANGELOG.md` says what changed, and every release is a git tag. `verso.css`
+also carries `--verso-build` in its `:root`, a property that names the release the file came from; it is not a
+design token and nothing reads it. To release:
 
-1. Change the files and run `pnpm build`, so `preview/preview.css` matches the gallery.
-2. Raise `version` in `package.json` and add an entry to `CHANGELOG.md`.
-3. Commit, tag `v<version>` (`git tag -a v0.2.0 -m "Verso 0.2.0"`) and push with `git push --follow-tags`.
-4. On the design site, sync this folder and add the version to Verso's record. The site's tests fail while the
-   record states a different version from the synced files.
+1. Change the files and run `pnpm build`, so `preview/preview.css` matches.
+2. Raise the version everywhere it is written: `version` in `package.json`, a new entry at the top of
+   `CHANGELOG.md`, the `/*!` banner on line 1 of `verso.css` and `preview/input.css`, `--verso-build` in
+   `verso.css`'s `:root`, and the version at the end of the gallery's footer (`preview/index.html`). Run
+   `pnpm build` again and `pnpm check`, which fails while any of them differ.
+3. Commit, tag `v<version>` (`git tag -a v0.3.0 -m "Verso 0.3.0"`) and push with `git push --follow-tags`, then
+   publish a GitHub Release from the tag with the CHANGELOG entry.
+4. On the design site, run `pnpm sync:system verso <this folder>`, put the pictures in
+   `public/images/verso/<version>/`, and add the version to the record. The site's tests fail while the record,
+   the synced files or a version the gallery names disagree.
+5. Optionally, after the site deploys, save a Wayback snapshot of the product page in both languages.
+
+## Licence
+
+The code is MIT: `verso.css` and everything in `preview/` (HTML and CSS). `DESIGN.md` and the Figma library
+"Verso Design System" are CC BY 4.0: you may copy and adapt them, also commercially, if you give credit:
+"Verso by Rifki Ramdani, https://uiux.mrramdn.com/en/systems/verso". The full text is in `LICENSE`.
 
 ## Where the look comes from
 

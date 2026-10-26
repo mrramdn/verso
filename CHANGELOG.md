@@ -3,6 +3,28 @@
 Verso uses semantic versions. While it is in beta, a minor version adds or changes tokens, components or rules,
 and a patch fixes them. Every version is a git tag (`v0.1.0`) and an entry in the design site's record.
 
+## 0.2.3 (2026-10-26)
+
+A licence, native controls that follow night reading, and a release that checks itself; nothing else looks
+different.
+
+- Verso has a licence. `LICENSE` puts `verso.css` and everything in `preview/` under MIT, and `DESIGN.md` and the
+  Figma library under CC BY 4.0, so both can be copied and adapted, also commercially, with credit.
+  `package.json` says `MIT AND CC-BY-4.0`, line 1 of `verso.css` and `preview/input.css` (and so of the built
+  `preview/preview.css`) is a `/*!` banner with the version, the holder and the link, and `DESIGN.md`'s Overview
+  opens with the credit line.
+- `:root` sets `color-scheme: light` and `.dark` sets `color-scheme: dark`, so scrollbars and native form
+  controls are drawn dark at night instead of staying light on a dark page.
+- `:root` carries `--verso-build`, which names the release the file came from. It is not a design token and
+  nothing reads it.
+- `pnpm check` (`scripts/check-version.mjs`) fails while `package.json`, the newest entry here, the three
+  banners, `--verso-build` and the version in the gallery's footer disagree. The README's release steps name
+  every one of those places, and add a GitHub Release and an optional Wayback snapshot.
+- The gallery's footer reads Verso 0.2.3.
+- `DESIGN.md`'s Do's and Don'ts say the wordmark and headlines carry no icon, logo mark or initials badge; the
+  gallery and the demo have none.
+- The Figma library does not change.
+
 ## 0.2.2 (2026-10-24)
 
 For screen readers; nothing looks different.

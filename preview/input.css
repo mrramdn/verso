@@ -1,3 +1,4 @@
+/*! Verso 0.2.3 · © 2026 Rifki Ramdani · MIT · https://uiux.mrramdn.com/en/systems/verso */
 @import "tailwindcss" source(none);
 @import "../verso.css";
 /* Only the gallery and the demo are scanned for classes, so prose in DESIGN.md or the README never adds CSS. */

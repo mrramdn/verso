@@ -1,3 +1,4 @@
+/*! Verso 0.2.3 · © 2026 Rifki Ramdani · MIT · https://uiux.mrramdn.com/en/systems/verso */
 /*
  * Verso: a theme for reading, for Tailwind CSS v4. Warm paper, warm ink and one
  * red; serif text set to a book's measure; hairline rules instead of shadows.
@@ -12,6 +13,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  /* The release this file came from. Not a design token: nothing reads it. */
+  --verso-build: "verso 0.2.3 · uiux.mrramdn.com";
   --background: #f4eee1;
   --foreground: #201b18;
   --card: #fbf7f0;
@@ -36,6 +39,7 @@
   --ring: #b5321c;
   --highlight: #f0d8cd;
   --radius: 0.25rem;
+  color-scheme: light;
 }
 
 .dark {
@@ -62,6 +66,7 @@
   --input: #7a7167;
   --ring: #e0674e;
   --highlight: #4a2e27;
+  color-scheme: dark;
 }
 
 @theme {

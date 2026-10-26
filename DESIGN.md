@@ -216,6 +216,8 @@ components:
 
 ## Overview
 
+Verso is by Rifki Ramdani (https://uiux.mrramdn.com/en/systems/verso). This file is licensed under CC BY 4.0: copy and adapt it, with credit. The CSS and HTML are MIT.
+
 Verso is a design system for reading: long articles, newsletters, essays, documentation, and the quiet product interface around them (subscribe, settings, comments, a reading list). Its rules come from book and magazine typography. The verso is the left-hand page of an open book.
 
 The page is warm paper, the text is warm ink, and one red does the work that red ink did in manuscripts: it marks the way through the text. Links, the one primary action, selected states, the drop cap and the reading progress are red; nothing else is. Structure comes from type, whitespace and hairline rules, never from shadows or tinted boxes. Text is set in Newsreader at a book's measure; the interface around it is set in Instrument Sans, smaller and quieter.
@@ -258,7 +260,7 @@ Use semantic tokens only. The default Tailwind palette is removed in `verso.css`
 | `ring` | `#B5321C` | `#E0674E` | Focus ring |
 | `highlight` | `#F0D8CD` | `#4A2E27` | Text selection and marked text |
 
-`card-foreground`, `popover-foreground`, `secondary-foreground` and `accent-foreground` equal `foreground`. In dark mode the text is paper-colored, not white, and the red is lighter so that it still reads on charcoal. Dark mode is the `.dark` class on a parent element.
+`card-foreground`, `popover-foreground`, `secondary-foreground` and `accent-foreground` equal `foreground`. In dark mode the text is paper-colored, not white, and the red is lighter so that it still reads on charcoal. Dark mode is the `.dark` class on a parent element. The .dark block also sets color-scheme: dark, so native controls and scrollbars follow the theme.
 
 Rules:
 
@@ -592,3 +594,4 @@ Every interactive element gets the global focus style from `verso.css`: a 2px `r
 - Don't put the article text in a card; cards are for lists of things, the text sits on the paper.
 - Don't use the default Tailwind palette or hard-coded hex values in components.
 - Don't shrink interface text below 12px or text inputs below 16px.
+- Don't put an icon, a logo mark or an initials badge beside the wordmark or a headline: both are text only.

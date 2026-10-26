@@ -1,11 +1,13 @@
 {
   "name": "verso",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
+  "license": "MIT AND CC-BY-4.0",
   "description": "Verso: a design system for reading, for Tailwind CSS v4, DESIGN.md and Figma",
   "scripts": {
-    "build": "tailwindcss -i preview/input.css -o preview/preview.css --minify",
-    "dev": "tailwindcss -i preview/input.css -o preview/preview.css --watch"
+    "build": "tailwindcss -i preview/input.css -o preview/preview.css --minify && node scripts/banner-first.mjs",
+    "dev": "tailwindcss -i preview/input.css -o preview/preview.css --watch",
+    "check": "node scripts/check-version.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
