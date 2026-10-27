@@ -23,7 +23,7 @@ different.
 - The gallery's footer reads Verso 0.2.3.
 - `DESIGN.md`'s Do's and Don'ts say the wordmark and headlines carry no icon, logo mark or initials badge; the
   gallery and the demo have none.
-- The Figma library does not change.
+- Figma: the gallery's footer no longer states a version, and the Cover page carries the licence note.
 
 ## 0.2.2 (2026-10-24)
 
